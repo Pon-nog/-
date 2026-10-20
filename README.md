@@ -1,3 +1,5 @@
+品赞每周签到，github云服务
+原作者：https://github.com/666fy666/WebMoniter/blob/main/src/tasks/pinzan_checkin.py
 # 添加 Secrets 密钥
 
 1. 顶部菜单点 **Settings**
