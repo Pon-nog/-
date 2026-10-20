@@ -1,0 +1,29 @@
+name: 品赞每周签到
+on:
+  schedule:
+    # UTC时间 每周一0点 = 北京时间周一早上8点
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+jobs:
+  pinzan_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 设置Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 安装依赖
+        run: |
+          pip install requests aiohttp
+
+      - name: 执行签到脚本
+        env:
+          PINZAN_ACCOUNTS: ${{ secrets.PINZAN_ACCOUNTS }}
+          WXPUSHER_TOKEN: ${{ secrets.WXPUSHER_TOKEN }}
+          WXPUSHER_TOPIC: ${{ secrets.WXPUSHER_TOPIC }}
+        run: python pinzan-checkin.py
